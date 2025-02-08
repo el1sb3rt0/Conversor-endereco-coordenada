@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import requests
-import plotly.express as px
 
 st.title('Conversor de Endereços em Coordenadas Geográficas')
 endereco = st.text_input('Digite o endereço:')
@@ -20,15 +19,8 @@ for local in data:
     st.write(f'**Endereço:** {nome_endereco}')
 
 df_localizacoes = pd.DataFrame(geografica, columns=['latitude', 'longitude'])
-fig = px.scatter_map(
-    df_localizacoes,
-    lat='latitude',
-    lon='longitude',
-    size_max=15,
-    zoom=12
-)
-fig.update_layout(mapbox_style='open-street-map')
-st.plotly_chart(fig)
+st.map(df_localizacoes)
+
 
 st.write('Desenvolvido por: [Elisberto Oliveira]')
 st.write('Fonte de dados: [Open Street Map]/[geocode.maps.co]')
